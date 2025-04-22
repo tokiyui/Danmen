@@ -32,6 +32,7 @@ jobs:
       - name: Plotting
         run: |
           python GFS.py
+          python GSM.py
           python IFS.py
 
       - name: Commit and Push Changes
