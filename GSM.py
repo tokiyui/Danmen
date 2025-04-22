@@ -198,7 +198,7 @@ ds['lat'].attrs['units'] = 'degrees_north'
 ds['lon'].attrs['units'] = 'degrees_east'
 
 ## 必要な物理量を計算する
-ds['dewpoint_temperature'] = mpcalc.dewpoint_from_specific_humidity(ds['level'] * units.hPa, ds['specific_humidity'] * 1000 * units('g/kg'))
+ds['dewpoint_temperature'] = mpcalc.dewpoint_from_relative_humidity(ds['temperature'], ds['relative_humidity'] * 1000 * units('g/kg'))
 ds['ttd'] = ds['temperature'] - ds['dewpoint_temperature']
 
 # 表示のために単位を変換する
