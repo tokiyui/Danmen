@@ -30,8 +30,7 @@ jobs:
 
       - name: Plotting
         run: |
-          git rm ./*.png
-          python ifs.py
+          python IFS.py
 
       - name: Commit and Push Changes
         id: git_changes
