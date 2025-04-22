@@ -214,7 +214,7 @@ dsp['time'] = dsp['time'] + pd.Timedelta(hours=9)
 
 ## 時系列図作成
 # ポイント指定
-i_lat, i_lon= 57, 79  # 羽田 35.5554N　139.754E
+i_lat, i_lon= 157, 179  # 羽田 35.5554N　139.754E
 print("Point {}N,{}E".format(lats[i_lat],lons[i_lon]))
 
 # 図の大きさを指定
@@ -293,5 +293,5 @@ dates = pd.to_datetime(dsp['time']).normalize().unique()
 for date in dates:
     ax.axvline(date, linestyle='--', linewidth=1)
 
-fig.text(0.5,0.01,"GSM FT{:03d}-{:03d} {}Z Initial".format(fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
+fig.text(0.5,0.01,"MSM FT{:03d}-{:03d} {}Z Initial".format(fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
 plt.savefig('msm.png')
