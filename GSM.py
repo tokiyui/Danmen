@@ -68,8 +68,8 @@ gsm_fn_t="Z__C_RJTD_{0:4d}{1:02d}{2:02d}{3:02d}0000_GSM_GPV_Rjp_Gll0p1deg_L-pall
 
 ### 事前に一度データを読み込み  配列のサイズを決めるため
 ft = fts[0]
-dat_fld=data_fld.format(i_year,i_month,i_day)
-gr_fn= gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,'0000-0100')
+dat_fld = data_fld.format(i_year,i_month,i_day)
+gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,'0000-0100')
 
 # HTTPでファイルダウンロード
 response = requests.get(dat_fld + gr_fn)
@@ -80,8 +80,8 @@ with open(gr_fn, 'wb') as f:
     f.write(response.content)
 
 # データOpen
-grbs = pygrib.open(gsm_fn_t)
-print(gsm_fn_t)
+grbs = pygrib.open(gr_fn)
+print(gr_fn)
 
 # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
 grbTm = grbs(shortName="t",forecastTime=0,typeOfLevel='isobaricInhPa',level=lambda l:l >= 300)
