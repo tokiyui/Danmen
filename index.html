@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>4分割画像表示</title>
+  <style>
+    body {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+      height: 100vh;
+    }
+    .cell {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ccc;
+    }
+    .cell img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="cell"><img src="msm.png" alt="MSM"></div>
+  <div class="cell"><img src="gsm.png" alt="GSM"></div>
+  <div class="cell"><img src="gfs.png" alt="GFS"></div>
+  <div class="cell"><img src="ifs.png" alt="IFS"></div>
+</body>
+</html>
