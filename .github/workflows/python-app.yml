@@ -26,7 +26,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential
           python -m pip install --upgrade pip
-          pip install numpy pygrib metpy
+          pip install numpy pygrib metpy cartopy
           export PATH=$PATH:/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages:/home/runner/.local/lib/python3.10/site-packages
 
       - name: Plotting
