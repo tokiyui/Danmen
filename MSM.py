@@ -129,8 +129,14 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
-    response = requests.get(dat_fld + gr_fn)
-    response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
+    file_path = os.path.join(dat_fld, gr_fn)
+    if not os.path.exists(file_path):
+        print(f"ダウンロード開始: {file_path}")
+        response = requests.get(dat_fld + gr_fn)
+        response.raise_for_status()  # エラーがあれば例外を発生
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+        print("ダウンロード完了")
 
     # ダウンロードしたコンテンツをローカルに保存
     with open(gr_fn, 'wb') as f:
