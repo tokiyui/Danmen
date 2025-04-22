@@ -270,4 +270,4 @@ for date in dates:
     ax.axvline(date, linestyle='--', linewidth=1)
 
 fig.text(0.5,0.01,"GFS FT{:03d}-{:03d} {}Z Initial".format(fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
-plt.savefig('public_html/gfs.png')
+plt.savefig('gfs.png')
