@@ -131,8 +131,11 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
-    response = requests.get(dat_fld + gr_fn)
-    response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
+    file_path = os.path.join(dat_fld, gr_fn)
+    if not os.path.exists(gr_fn):
+        print(f"ダウンロード開始: {gr_fn}")
+        response = requests.get(dat_fld + gr_fn)
+        response.raise_for_status()  # エラーがあれば例外を発生
 
     # ダウンロードしたコンテンツをローカルに保存
     with open(gr_fn, 'wb') as f:
@@ -142,11 +145,11 @@ for i in range(t_size): # ft の時間ループ
     grbs = pygrib.open(gr_fn)
 
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
-    grbHt = grbs(shortName="gh",typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbTm = grbs(shortName="t",typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbWu = grbs(shortName="u",typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbWv = grbs(shortName="v",typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbRh = grbs(shortName="r",typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHpRh)
+    grbHt = grbs(shortName="gh",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbTm = grbs(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbWu = grbs(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbWv = grbs(shortName="v",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbRh = grbs(shortName="r",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHpRh)
 
     # 読み込んだデータの時刻取得
     dts.append(grbHt[0].validDate)
