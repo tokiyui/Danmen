@@ -80,9 +80,8 @@ with open(gr_fn, 'wb') as f:
     f.write(response.content)
 
 # データOpen
-grbs = pygrib.open(gr_fn)
-print(gr_fn)
-
+grbs = pygrib.open(gsm_fn_t)
+print(gsm_fn_t)
 
 # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
 grbTm = grbs(shortName="t",forecastTime=0,typeOfLevel='isobaricInhPa',level=lambda l:l >= 300)
