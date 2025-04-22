@@ -131,7 +131,7 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # 要素別に読み込み
-    grbs = pygrib.open(dat_fld + gr_fn)
+    grbs = pygrib.open(gr_fn)
 
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
     grbHt = grbs(shortName="gh",typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
