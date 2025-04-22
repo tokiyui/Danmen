@@ -130,7 +130,15 @@ for i in range(t_size): # ft の時間ループ
     gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,date)
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
-    # 要素別に読み込み
+    # HTTPでファイルダウンロード
+    response = requests.get(dat_fld + gr_fn)
+    response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
+
+    # ダウンロードしたコンテンツをローカルに保存
+    with open(gr_fn, 'wb') as f:
+        f.write(response.content)
+
+    # データOpen
     grbs = pygrib.open(gr_fn)
 
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
