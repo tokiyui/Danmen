@@ -20,8 +20,8 @@ now_utc = datetime.datetime.utcnow()
 # 8時間引く
 adjusted_time = now_utc - datetime.timedelta(hours=8)
 
-# 6時間単位で切り捨て
-truncated_hour = (adjusted_time.hour // 6) * 6
+# 12時間単位で切り捨て
+truncated_hour = (adjusted_time.hour // 12) * 12
 dt = adjusted_time.replace(hour=truncated_hour, minute=0, second=0, microsecond=0)
 
 # 個別に取り出したい場合
@@ -34,7 +34,7 @@ print("IT(UTC):", dt)
 
 ## 時間範囲：作成するデータセットのftの期間を指定(ft_s:期間始まりのFT ft_e:期間終端のFT ft_step:読み込む時間間隔)
 ft_s = 0
-ft_e = 144
+ft_e = 78
 ft_step = 3
 fts = list(range(ft_s, ft_e+1, ft_step))
 
