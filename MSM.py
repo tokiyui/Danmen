@@ -130,13 +130,10 @@ for i in range(t_size): # ft の時間ループ
 
     # HTTPでファイルダウンロード
     file_path = os.path.join(dat_fld, gr_fn)
-    if not os.path.exists(file_path):
-        print(f"ダウンロード開始: {file_path}")
+    if not os.path.exists(gr_fn):
+        print(f"ダウンロード開始: {gr_fn}")
         response = requests.get(dat_fld + gr_fn)
         response.raise_for_status()  # エラーがあれば例外を発生
-        with open(file_path, 'wb') as f:
-            f.write(response.content)
-        print("ダウンロード完了")
 
     # ダウンロードしたコンテンツをローカルに保存
     with open(gr_fn, 'wb') as f:
