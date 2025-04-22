@@ -295,5 +295,5 @@ dates = pd.to_datetime(dsp['time']).normalize().unique()
 for date in dates:
     ax.axvline(date, linestyle='--', linewidth=1)
 
-fig.text(0.5,0.01,"GSM FT{:03d}-{:03d} {}Z Initial".format(fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
+fig.text(0.5,0.01,"{:.2f}N, {:.2f}E GSM FT{:03d}-{:03d} {}Z Initial".format(lats[i_lat],lons[i_lon],fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
 plt.savefig('gsm.png')
