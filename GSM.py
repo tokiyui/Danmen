@@ -216,7 +216,7 @@ dsp['time'] = dsp['time'] + pd.Timedelta(hours=9)
 
 ## 時系列図作成
 # ポイント指定
-i_lat, i_lon= 125, 158  # 羽田 35.5554N　139.754E
+i_lat, i_lon= 145, 158  # 羽田 35.5554N　139.754E
 print("Point {}N,{}E".format(lats[i_lat],lons[i_lon]))
 
 # 図の大きさを指定
