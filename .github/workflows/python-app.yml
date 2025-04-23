@@ -1,12 +1,8 @@
 name: Python application
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   schedule:
-    - cron: '40 * * * *'
+    - cron: '40 4,6,8,16,18,20 * * *'
 
 permissions:
   actions: write
