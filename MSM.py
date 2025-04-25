@@ -8,7 +8,6 @@ import cartopy.crs as ccrs
 import metpy.calc as mpcalc
 from metpy.interpolate import cross_section
 from metpy.units import units
-
 import matplotlib.dates as mdates
 import pandas as pd
 import requests
@@ -197,6 +196,11 @@ ds['v_wind'].attrs['units']='m/s'
 ds['level'].attrs['units'] = 'hPa'
 ds['lat'].attrs['units'] = 'degrees_north'
 ds['lon'].attrs['units'] = 'degrees_east'
+
+# 0度以下におけるMSMとGSMの飽和水蒸気量の定義の違いを補正
+mask = ds['temperature'] <= 273.15
+temp = ds['temperature'] - 273.15
+ds['relative_humidity'] = xr.where(mask, ds['relative_humidity'] * (10 ** (7.5 * temp / (237.3 + temp) - 9.5 * temp /(265.5 + temp))))
 
 ## 必要な物理量を計算する
 ds['dewpoint_temperature'] = mpcalc.dewpoint_from_relative_humidity(ds['temperature'], ds['relative_humidity'] * 1000 * units('g/kg'))
