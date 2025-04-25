@@ -199,7 +199,7 @@ ds['lon'].attrs['units'] = 'degrees_east'
 
 # 0度以下におけるMSMとGSMの飽和水蒸気量の定義の違いを補正
 mask = ds['temperature'].values <= 273.15
-temp = ds['temperature'] - 273.15
+temp = ds['temperature'].values - 273.15
 ds['relative_humidity'] = xr.where(mask, ds['relative_humidity'] * (10 ** (7.5 * temp / (237.3 + temp) - 9.5 * temp /(265.5 + temp))), ds['relative_humidity'])
 
 ## 必要な物理量を計算する
