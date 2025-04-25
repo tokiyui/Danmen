@@ -198,7 +198,7 @@ ds['lat'].attrs['units'] = 'degrees_north'
 ds['lon'].attrs['units'] = 'degrees_east'
 
 # 0度以下におけるMSMとGSMの飽和水蒸気量の定義の違いを補正
-mask = ds['temperature'] <= 273.15
+mask = ds['temperature'].pint.magnitude <= 273.15
 temp = ds['temperature'] - 273.15
 ds['relative_humidity'] = xr.where(mask, ds['relative_humidity'] * (10 ** (7.5 * temp / (237.3 + temp) - 9.5 * temp /(265.5 + temp))), ds['relative_humidity'])
 
