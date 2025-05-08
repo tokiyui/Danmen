@@ -2,7 +2,7 @@ name: Python application
 
 on:
   schedule:
-    - cron: '40 4,6,8,16,18,20 * * *'
+    - cron: '40 * * * *'
 
 permissions:
   actions: write
