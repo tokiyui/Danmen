@@ -103,7 +103,7 @@ aryWv = np.zeros([t_size, l_size, lat_size, lon_size])
 
 # ### 4次元配列にデータを格納
 dts=[]
-for i in range(27): # ft の時間ループ
+for i in range(t_size): # ft の時間ループ
     ft = fts[i]
     # ファイル名作成
     gr_fn = gsm_fn_t.format(i_hourZ,ft)
@@ -214,7 +214,7 @@ el_heights = []
 wb_heights_list = []
 wb_heights = []
 
-for i in range(t_size):
+for i in range(27):
     # 時間に対応するデータを取得
     temperature = dsp['temperature'][:, :, i_lat, i_lon]
     dewpoint = dsp['dewpoint_temperature'][:, :, i_lat, i_lon]
