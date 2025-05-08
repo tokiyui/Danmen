@@ -34,9 +34,9 @@ print("IT(UTC):", dt)
 
 ## 時間範囲：作成するデータセットのftの期間を指定(ft_s:期間始まりのFT ft_e:期間終端のFT ft_step:読み込む時間間隔)
 ft_s = 0
-ft_e = 78
+ft_e = 240
 ft_step = 3
-fts =list(range(ft_s, ft_e+1, ft_step))
+fts = list(range(ft_s, ft_e+1, ft_step))
 
 ## 空間範囲：GPVの切り出し領域の指定：(lonW,latS)-(lonE,latN)の矩形
 (latS, latN, lonW, lonE) = (20, 50, 120, 150)
@@ -103,7 +103,7 @@ aryWv = np.zeros([t_size, l_size, lat_size, lon_size])
 
 # ### 4次元配列にデータを格納
 dts=[]
-for i in range(t_size): # ft の時間ループ
+for i in range(27): # ft の時間ループ
     ft = fts[i]
     # ファイル名作成
     gr_fn = gsm_fn_t.format(i_hourZ,ft)
@@ -271,3 +271,61 @@ for date in dates:
 
 fig.text(0.5,0.01,"{:.2f}N, {:.2f}E GFS FT{:03d}-{:03d} {}Z Initial".format(lats[i_lat],lons[i_lon],fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
 plt.savefig('gfs.png')
+
+for i in range(t_size):
+    # 時間に対応するデータを取得
+    temperature = dsp['temperature'][:, :, i_lat, i_lon]
+    dewpoint = dsp['dewpoint_temperature'][:, :, i_lat, i_lon]
+    pressure = dsp['level'].values
+
+    # 湿球温度
+    wb = mpcalc.wet_bulb_temperature(dsp['level'] * units.hPa, temperature[i, :], dewpoint[i, :])
+    wb_heights_list.append(wb)
+
+    # LCL (持ち上げ凝結高度)を計算
+    lcl = mpcalc.lcl(pressure[0] * units.hPa, temperature[i, 0], dewpoint[i, 0])
+    lcl_heights_list.append(lcl[0].magnitude)
+
+    # CAPE (自由対流高度)を計算
+    el = mpcalc.el(pressure * units.hPa, temperature[i, :], dewpoint[i, :])
+    el_heights_list.append(el[0].magnitude)
+
+# 計算結果をリストに追加
+lcl_heights = np.array(lcl_heights_list) * units.hPa
+el_heights = np.array(el_heights_list) * units.hPa
+wb_heights = np.array(wb_heights_list) * units.hPa
+
+# 時系列図にLCLとCAPEをプロット
+ax.plot(dts, lcl_heights, color='blue', label='LCL (hPa)', linestyle='', marker='o', markersize=12)
+ax.plot(dts, el_heights, color='red', label='EL (hPa)', linestyle='', marker='o', markersize=12)
+
+## T-TDの時系列鉛直分布表示
+ax.contourf(dsp['time'],  dsp['level'].values, dsp['ttd'][:,:,i_lat,i_lon].values.T, [3,15], colors=["lime","white","yellow"], extend='both', alpha = 0.4)
+
+# 気温(橙実線)とラベル
+tmp_contour = ax.contour(dsp['time'],  dsp['level'].values, dsp['temperature'][:,:,i_lat,i_lon].values.T, levels=np.arange(-60, 45, 3), colors='red', linewidths=1, linestyles='solid')
+tmp_contour.clabel(tmp_contour.levels[1::2], fontsize=16, colors='red', inline=1, inline_spacing=8, fmt='%i', rightside_up=False, use_clabeltext=True)
+
+# 湿球温度
+ax.contour(dsp['time'],  dsp['level'].values, wb_heights.T, levels=np.arange(1.5, 100, 100), colors='purple', linewidths=2)
+
+# 風の矢羽
+ax.barbs(dsp['time'], dsp['level'].values, dsp['u_wind'][:,:,i_lat,i_lon].values.T, dsp['v_wind'][:,:,i_lat,i_lon].values.T)
+
+plt.gca().invert_xaxis()
+
+# X軸をJSTの形式に変更（日時のフォーマット）
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %HJST'))
+
+# X軸の目盛り間隔を6時間に設定
+ax.xaxis.set_major_locator(mdates.HourLocator(byhour=[6,18]))
+
+# ユニークな日付を取得（時刻は0:00にする）
+dates = pd.to_datetime(dsp['time']).normalize().unique()
+
+# 各日付の0:00 JSTに縦線を引く
+for date in dates:
+    ax.axvline(date, linestyle='--', linewidth=1)
+
+fig.text(0.5,0.01,"{:.2f}N, {:.2f}E GFS FT{:03d}-{:03d} {}Z Initial".format(lats[i_lat],lons[i_lon],fts[0],fts[-1],dt), ha='center',va='bottom', size=15)
+plt.savefig('gfslong.png')
