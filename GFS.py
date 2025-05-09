@@ -91,7 +91,6 @@ lons = lonHt[0,:]
 print("x_size:{:3d} {}".format(lat_size, lats))
 print("y_size:{:3d} {}".format(lon_size, lons))
 # 時間の数
-dts = []
 t_size = len(fts)
 print("t_size:{:3d} {}".format(t_size, fts))
 
@@ -102,7 +101,7 @@ aryWu = np.zeros([t_size, l_size, lat_size, lon_size])
 aryWv = np.zeros([t_size, l_size, lat_size, lon_size])
 
 # ### 4次元配列にデータを格納
-dts=[]
+dts = []
 for i in range(t_size): # ft の時間ループ
     ft = fts[i]
     # ファイル名作成
@@ -238,8 +237,8 @@ el_heights = np.array(el_heights_list) * units.hPa
 wb_heights = np.array(wb_heights_list) * units.hPa
 
 # 時系列図にLCLとCAPEをプロット
-ax.plot(dts, lcl_heights, color='blue', label='LCL (hPa)', linestyle='', marker='o', markersize=12)
-ax.plot(dts, el_heights, color='red', label='EL (hPa)', linestyle='', marker='o', markersize=12)
+ax.plot(dts[0:26], lcl_heights, color='blue', label='LCL (hPa)', linestyle='', marker='o', markersize=12)
+ax.plot(dts[0:26], el_heights, color='red', label='EL (hPa)', linestyle='', marker='o', markersize=12)
 
 ## T-TDの時系列鉛直分布表示
 ax.contourf(dsp['time'],  dsp['level'].values, dsp['ttd'][:,:,i_lat,i_lon].values.T, [3,15], colors=["lime","white","yellow"], extend='both', alpha = 0.4)
