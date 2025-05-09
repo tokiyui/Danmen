@@ -237,8 +237,8 @@ el_heights = np.array(el_heights_list) * units.hPa
 wb_heights = np.array(wb_heights_list) * units.hPa
 
 # 時系列図にLCLとCAPEをプロット
-ax.plot(dts[0:26], lcl_heights, color='blue', label='LCL (hPa)', linestyle='', marker='o', markersize=12)
-ax.plot(dts[0:26], el_heights, color='red', label='EL (hPa)', linestyle='', marker='o', markersize=12)
+ax.plot(dts[0:27], lcl_heights, color='blue', label='LCL (hPa)', linestyle='', marker='o', markersize=12)
+ax.plot(dts[0:27], el_heights, color='red', label='EL (hPa)', linestyle='', marker='o', markersize=12)
 
 ## T-TDの時系列鉛直分布表示
 ax.contourf(dsp['time'],  dsp['level'].values, dsp['ttd'][:,:,i_lat,i_lon].values.T, [3,15], colors=["lime","white","yellow"], extend='both', alpha = 0.4)
