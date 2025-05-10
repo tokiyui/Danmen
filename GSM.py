@@ -256,7 +256,10 @@ for i in range(t_size):
 
     # CAPE (自由対流高度)を計算
     el = mpcalc.el(pressure * units.hPa, temperature[i, :], dewpoint[i, :])
-    el_heights_list.append(el[0].magnitude)
+    if el[0].magnitude < 300:
+        el_heights_list.append(300)
+    else:
+        el_heights_list.append(el[0].magnitude)
 
 # 計算結果をリストに追加
 lcl_heights = np.array(lcl_heights_list) * units.hPa
