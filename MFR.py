@@ -49,8 +49,8 @@ tagHp=100
 data_fld="https://object.data.gouv.fr/meteofrance-pnt/pnt/{0:4d}-{1:02d}-{2:02d}T{3:02d}:00:00Z/arpege/025/IP1/"
 
 # 読み込むGRIB2形式GSMのファイル名
-gsm_fn_t1="arpege__025__IP1__{0:s}__/{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
-gsm_fn_t2="arpege__025__IP1__{0:s}__/{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
+gsm_fn_t1="arpege__025__IP1__{0:s}__{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
+gsm_fn_t2="arpege__025__IP1__{0:s}__{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
 
 # ### データフレームを作成するための４次元配列を確保する
 # - 試しにGPVを読み込み、必要な配列を確保するlevelやlat,lonのサイズを求める
