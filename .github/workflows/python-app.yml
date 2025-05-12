@@ -27,6 +27,7 @@ jobs:
 
       - name: Plotting
         run: |
+          python MFR.py
           python MSM.py
           python GFS.py
           python GSM.py
