@@ -36,7 +36,7 @@ print("IT(UTC):", dt)
 ft_s = 0
 ft_e = 78
 ft_step = 3
-fts =list(range(ft_s, ft_e+1, ft_step))
+fts = list(range(ft_s, ft_e+1, ft_step))
 
 ## 空間範囲：GPVの切り出し領域の指定：(lonW,latS)-(lonE,latN)の矩形
 (latS, latN, lonW, lonE) = (20, 50, 120, 150)
@@ -74,6 +74,9 @@ with open(gr_fn, 'wb') as f:
 # データOpen
 grbs = pygrib.open(gr_fn)
 print(gr_fn)
+
+for grb in grbs:
+    print(grb,grb.shortName)
 
 # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
 grbTm = grbs(shortName="t",forecastTime=0,typeOfLevel='isobaricInhPa',level=lambda l:l >= 300)
