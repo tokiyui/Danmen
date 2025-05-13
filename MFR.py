@@ -142,12 +142,12 @@ for i in range(t_size): # ft の時間ループ
     grbs2 = pygrib.open(gr_fn2)
     
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
-    grbHt = grbs(shortName="z",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbTm = grbs(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbWu = grbs(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbWv = grbs(shortName="v",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbHt = grbs1(shortName="z",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbTm = grbs1(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbWu = grbs1(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbWv = grbs1(shortName="v",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     #grbRh = grbs(shortName="r",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbTd = grbs(shortName="td",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbTd = grbs2(shortName="td",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
 
     # 読み込んだデータの時刻取得
     dts.append(grbTm[0].validDate)
