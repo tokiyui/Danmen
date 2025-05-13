@@ -75,9 +75,6 @@ with open(gr_fn, 'wb') as f:
 grbs = pygrib.open(gr_fn)
 print(gr_fn)
 
-for grb in grbs:
-    print(grb,grb.shortName)
-
 # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
 grbTm = grbs(shortName="t",forecastTime=0,typeOfLevel='isobaricInhPa',level=lambda l:l >= 300)
 valHt, latHt, lonHt = grbTm[0].data(lat1=latS,lat2=latN,lon1=lonW,lon2=lonE)
@@ -145,7 +142,7 @@ for i in range(t_size): # ft の時間ループ
     grbs2 = pygrib.open(gr_fn2)
     
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
-    grbHt = grbs(shortName="gh",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbHt = grbs(shortName="z",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbTm = grbs(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbWu = grbs(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbWv = grbs(shortName="v",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
