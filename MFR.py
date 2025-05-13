@@ -50,7 +50,7 @@ data_fld="https://object.data.gouv.fr/meteofrance-pnt/pnt/{0:4d}-{1:02d}-{2:02d}
 
 # 読み込むGRIB2形式GSMのファイル名
 gsm_fn_t1="arpege__025__IP1__{0:s}__{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
-gsm_fn_t2="arpege__025__IP1__{0:s}__{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
+gsm_fn_t2="arpege__025__IP2__{0:s}__{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
 
 # ### データフレームを作成するための４次元配列を確保する
 # - 試しにGPVを読み込み、必要な配列を確保するlevelやlat,lonのサイズを求める
@@ -142,7 +142,7 @@ for i in range(t_size): # ft の時間ループ
     grbs2 = pygrib.open(gr_fn2)
 
     for grb in grbs2:
-        print(grb)
+        print(grb,grb.shortName)
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
     grbHt = grbs1(shortName="z",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbTm = grbs1(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
