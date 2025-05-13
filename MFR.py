@@ -46,7 +46,7 @@ tagHp=100
 
 # データの格納先フォルダー名
 ##!!! GRIB2データの保存先をFolderを指定すること !!!
-data_fld="https://object.data.gouv.fr/meteofrance-pnt/pnt/{0:4d}-{1:02d}-{2:02d}T{3:02d}:00:00Z/arpege/025/IP1/"
+data_fld="https://object.data.gouv.fr/meteofrance-pnt/pnt/{0:4d}-{1:02d}-{2:02d}T{3:02d}:00:00Z/arpege/025/"
 
 # 読み込むGRIB2形式GSMのファイル名
 gsm_fn_t1="arpege__025__IP1__{0:s}__{1:4d}-{2:02d}-{3:02d}T{4:02d}:00:00Z.grib2"
@@ -64,7 +64,7 @@ dat_fld = data_fld.format(i_year,i_month,i_day,i_hourZ)
 gr_fn = gsm_fn_t1.format('000H024H',i_year,i_month,i_day,i_hourZ)
 
 # HTTPでファイルダウンロード
-response = requests.get(dat_fld + gr_fn)
+response = requests.get(dat_fld + "IP1/" + gr_fn)
 response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
 
 # ダウンロードしたコンテンツをローカルに保存
@@ -120,15 +120,15 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn1,gr_fn2))
 
     # HTTPでファイルダウンロード
-    file_path = os.path.join(dat_fld, gr_fn1)
+    #file_path = os.path.join(dat_fld, gr_fn1)
     if not os.path.exists(gr_fn1):
         print(f"ダウンロード開始: {gr_fn1}")
-        response = requests.get(dat_fld + gr_fn1)
+        response = requests.get(dat_fld + "IP1/" + gr_fn1)
         response.raise_for_status()  # エラーがあれば例外を発生
-    file_path = os.path.join(dat_fld, gr_fn2)
+    #file_path = os.path.join(dat_fld, gr_fn2)
     if not os.path.exists(gr_fn2):
         print(f"ダウンロード開始: {gr_fn2}")
-        response = requests.get(dat_fld + gr_fn2)
+        response = requests.get(dat_fld + "IP2/" + gr_fn2)
         response.raise_for_status()  # エラーがあれば例外を発生
         
     # ダウンロードしたコンテンツをローカルに保存
