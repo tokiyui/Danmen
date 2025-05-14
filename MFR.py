@@ -131,17 +131,15 @@ for i in range(t_size): # ft の時間ループ
         response = requests.get(dat_fld + "IP2/" + gr_fn2)
         response.raise_for_status()  # エラーがあれば例外を発生
         
-    # ダウンロードしたコンテンツをローカルに保存
     with open(gr_fn1, 'wb') as f:
         f.write(response.content)
-    with open(gr_fn2, 'wb') as f:
-        f.write(response.content)
-        
-    # データOpen
     grbs1 = pygrib.open(gr_fn1)
+    
     for grb in grbs1:
         print(grb,grb.shortName)
-    
+
+    with open(gr_fn2, 'wb') as f:
+        f.write(response.content)
     grbs2 = pygrib.open(gr_fn2)
 
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）    
