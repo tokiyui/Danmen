@@ -117,7 +117,7 @@ for i in range(t_size): # ft の時間ループ
     # ファイル名作成
     gr_fn1 = gsm_fn_t1.format(date,i_year,i_month,i_day,i_hourZ)
     gr_fn2 = gsm_fn_t2.format(date,i_year,i_month,i_day,i_hourZ)
-    print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn1,gr_fn2))
+    print("FT:{:02d}:{:04d} {}, {}".format(ft, ft,gr_fn1,gr_fn2))
 
     # HTTPでファイルダウンロード
     file_path = os.path.join(dat_fld, gr_fn1)
