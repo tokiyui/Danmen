@@ -140,10 +140,11 @@ for i in range(t_size): # ft の時間ループ
     # データOpen
     grbs1 = pygrib.open(gr_fn1)
     grbs2 = pygrib.open(gr_fn2)
-
+    print(gr_fn1,gr_fn2)
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）
     for grb in grbs1:
         print(grb,grb.shortName)
+        
     grbHt = grbs1(shortName="z",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbTm = grbs1(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbWu = grbs1(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
