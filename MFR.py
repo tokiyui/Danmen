@@ -125,12 +125,7 @@ for i in range(t_size): # ft の時間ループ
         print(f"ダウンロード開始: {gr_fn1}")
         response = requests.get(dat_fld + "IP1/" + gr_fn1)
         response.raise_for_status()  # エラーがあれば例外を発生
-    file_path = os.path.join(dat_fld, gr_fn2)
-    if not os.path.exists(gr_fn2):
-        print(f"ダウンロード開始: {gr_fn2}")
-        response = requests.get(dat_fld + "IP2/" + gr_fn2)
-        response.raise_for_status()  # エラーがあれば例外を発生
-        
+
     with open(gr_fn1, 'wb') as f:
         f.write(response.content)
     grbs1 = pygrib.open(gr_fn1)
@@ -146,7 +141,14 @@ for i in range(t_size): # ft の時間ループ
     grbWu = grbs1(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     grbWv = grbs1(shortName="v",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
     #grbRh = grbs(shortName="r",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    
+
+    # HTTPでファイルダウンロード
+    file_path = os.path.join(dat_fld, gr_fn2)
+    if not os.path.exists(gr_fn2):
+        print(f"ダウンロード開始: {gr_fn2}")
+        response = requests.get(dat_fld + "IP2/" + gr_fn2)
+        response.raise_for_status()  # エラーがあれば例外を発生
+        
     with open(gr_fn2, 'wb') as f:
         f.write(response.content)
     grbs2 = pygrib.open(gr_fn2)
