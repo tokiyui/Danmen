@@ -31,6 +31,7 @@ jobs:
           python MSM.py
           python GFS.py
           python GSM.py
+          python AIFS.py
           python IFS.py
 
       - name: Commit and Push Changes
