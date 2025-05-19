@@ -129,18 +129,12 @@ for i in range(t_size): # ft の時間ループ
     with open(gr_fn1, 'wb') as f:
         f.write(response.content)
     grbs1 = pygrib.open(gr_fn1)
-
-    print(gr_fn1,gr_fn1)
-    
-    for grb in grbs1:
-        print(grb,grb.shortName)
+    all_grbs = list(grbs1)
     
     # 要素別に読み込み（tagHpの等圧面から下部のデータを全て）    
-    grbHt = grbs1(shortName="z",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbTm = grbs1(shortName="t",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbWu = grbs1(shortName="u",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    grbWv = grbs1(shortName="v",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
-    #grbRh = grbs(shortName="r",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    grbTm = sorted([g for g in all_grbs if g.shortName == "t" and g.typeOfLevel == "isobaricInhPa" and g.level >= tagHp], key=lambda g: g.level, reverse=True)
+    grbWu = sorted([g for g in all_grbs if g.shortName == "u" and g.typeOfLevel == "isobaricInhPa" and g.level >= tagHp], key=lambda g: g.level, reverse=True)
+    grbWv = sorted([g for g in all_grbs if g.shortName == "v" and g.typeOfLevel == "isobaricInhPa" and g.level >= tagHp], key=lambda g: g.level, reverse=True)
 
     # HTTPでファイルダウンロード
     file_path = os.path.join(dat_fld, gr_fn2)
@@ -152,7 +146,8 @@ for i in range(t_size): # ft の時間ループ
     with open(gr_fn2, 'wb') as f:
         f.write(response.content)
     grbs2 = pygrib.open(gr_fn2)
-    grbTd = grbs2(shortName="dpt",forecastTime=ft,typeOfLevel='isobaricInhPa',level=lambda l:l >= tagHp)
+    all_grbs = list(grbs2)
+    grbTd = sorted([g for g in all_grbs if g.shortName == "dpt" and g.typeOfLevel == "isobaricInhPa" and g.level >= tagHp], key=lambda g: g.level, reverse=True)
 
     # 読み込んだデータの時刻取得
     dts.append(grbTm[0].validDate)
