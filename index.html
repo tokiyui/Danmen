@@ -8,7 +8,7 @@
       margin: 0;
       display: grid;
       grid-template-columns: 33% 33% 33%;
-      grid-template-rows: 33% 33% 33%;
+      grid-template-rows: 50% 50%;
       height: 100vh;
     }
     .cell {
@@ -26,14 +26,35 @@
   </style>
 </head>
 <body>
-  <div class="cell"><a>このページはテスト中です</a></div>
-  <div class="cell"><img src="msm.png" alt="MSM"></div>
-  <div class="cell"><img src="gsm.png" alt="GSM"></div>
-  <div class="cell"><img src="gfs.png" alt="GFS"></div>
-  <div class="cell"><img src="ifs.png" alt="IFS"></div>
-  <div class="cell"><img src="aifs.png" alt="AIFS"></div>
+  <div class="cell"><ul>
+<li>GSM（JMA）、MSM（JMA）、GFS（NCEP）、IFS（ECMWF）の4つの気象モデルによる、東京付近の鉛直ー時間断面図を毎日00Z・12Zの2初期値で自動更新しています。(上はGSMによる図)</li>
+<li>最も予報時間の短いMSMに合わせて、78時間（3日ちょっと）先まで描画しています。天気は西から東に変わるため、先の時刻が左にくるように描画しています。</li>
+<li>定型の注意事項ではありますが、これらの図は天気予報そのものではありませんので、発表されている天気予報を説明する材料と考えてください。</li>
+<li><p>バグの指摘や質問、要望などがありましたらTwitterの @cho_tokisen までお問い合わせください。</p>
+</li>
+<li><p>もし専門的な知識のある方がいれば、この図単体で天気予報をするというよりは、上層と下層の対応関係や各要素の時間変化およびモデルごとの差を把握し、「何に着目すべきか」を考えるのが理想的だと思います。</p>
+<ul>
+<li>例1)上層トラフと寒気の通過に合わせて、下層の南風が強まり湿域が流入するので、大気の状態が不安定となるだろう→850hPa相当温位や下層収束など、不安定降水にかかわる要素の分布を確認</li>
+<li>例2)モデル間で下層の湿りの表現に差があり、下層風ベクトルにも差がある→地上の気圧配置（低気圧の位置や発達の程度）に着目し、じょう乱のメインシナリオに合った気象モデルを採用</li>
+<li>このあたりの利用方法は作者にとっても試行錯誤中ではあります。</li>
+</ul>
+</li>
+<li><p>表の見方</p>
+<ul>
+<li>赤線：等温線（3℃ごと）</li>
+<li>矢羽根：各高度における風</li>
+<li>緑塗：湿数（気温-露点温度）&lt;3℃の湿域</li>
+<li>黄塗：湿数&gt;15℃の乾燥域</li>
+<li>青点：LFC（自由対流高度、存在しない場合もある）</li>
+<li>赤点：EL（平衡高度、存在しない場合もある）</li>
+<li>紫線：湿球温度0℃線（降雪の可能性がある目安）</li>
+</ul>
+</li>
+  </ul></div>
   <div class="cell"><img src="msm.png" alt="MSM"></div>
   <div class="cell"><img src="gsm.png" alt="GSM"></div>
   <div class="cell"><img src="mfr.png" alt="MFR"></div>
+  <div class="cell"><img src="ifs.png" alt="IFS"></div>
+  <div class="cell"><img src="gfs.png" alt="GFS"></div>
 </body>
 </html>
