@@ -25,9 +25,9 @@ jobs:
 
       - name: Run plotting scripts
         run: |
-          python MFR.py
-          python MSM.py
           python GFS.py
+          python MSM.py
+          python MFR.py
           python GSM.py
           python AIFS.py
           python IFS.py
