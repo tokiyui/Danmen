@@ -115,9 +115,10 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
+    sleep(10)
     response = requests.get(dat_fld + gr_fn)
     response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
-
+    
     # ダウンロードしたコンテンツをローカルに保存
     with open(gr_fn, 'wb') as f:
         f.write(response.content)
