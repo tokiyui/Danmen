@@ -13,6 +13,7 @@ import pandas as pd
 import requests
 import os
 import datetime
+import time
 
 # 現在のUTC時刻を取得
 now_utc = datetime.datetime.utcnow()
@@ -115,7 +116,7 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
-    sleep(10)
+    time.sleep(10)
     response = requests.get(dat_fld + gr_fn)
     response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
     
