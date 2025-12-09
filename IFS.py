@@ -52,7 +52,7 @@ if i_hourZ == 00 or i_hourZ == 12:
 else:
     name = "scda"
 
-data_fld="https://data.ecmwf.int/ecpds/home/opendata/{0:04d}{1:02d}{2:02d}/{3:02d}z/ifs/0p25/{4:s}/"
+data_fld="https://storage.googleapis.com/ecmwf-open-data/{0:04d}{1:02d}{2:02d}/{3:02d}z/ifs/0p25/{4:s}/"
 
 # 読み込むGRIB2形式GSMのファイル名
 gsm_fn_t="{0:4d}{1:02d}{2:02d}{3:02d}0000-{4:d}h-{5:s}-fc.grib2"
