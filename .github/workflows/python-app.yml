@@ -27,9 +27,7 @@ jobs:
         run: |
           python GFS.py
           python MSM.py
-          python MFR.py
           python GSM.py
-          python AIFS.py
           python IFS.py
 
       - name: Commit and Push Changes
