@@ -23,6 +23,26 @@
       max-height: 100%;
       object-fit: contain;
     }
+    .subgrid {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+    }
+    .subcell {
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-size: 0.9em;
+    }
+    .subcell img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
@@ -42,7 +62,26 @@
   </ul></div>
   <div class="cell"><img src="msm.png" alt="MSM"></div>
   <div class="cell"><img src="gsm.png" alt="GSM"></div>
-  <div class="cell"><img src="mfr.png" alt="MFR"></div>
+<div class="cell">
+  <div class="subgrid">
+    <div class="subcell">
+      天気図（tenki.jpから）
+    </div>
+
+    <div class="subcell">
+      <img src="https://imageflux.tenki.jp/large/static-images/chart/forecast-24/large.jpg" alt="24時間後">
+    </div>
+
+    <div class="subcell">
+      <img src="https://imageflux.tenki.jp/large/static-images/chart/forecast-48/large.jpg" alt="48時間後">
+    </div>
+
+    <div class="subcell">
+      <img src="https://imageflux.tenki.jp/large/static-images/chart/forecast-72/large.jpg" alt="72時間後">
+    </div>
+  </div>
+</div>
+
   <div class="cell"><img src="ifs.png" alt="IFS"></div>
   <div class="cell"><img src="gfs.png" alt="GFS"></div>
 </body>
