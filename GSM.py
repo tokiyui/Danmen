@@ -291,6 +291,9 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %HJST'))
 # X軸の目盛り間隔を6時間に設定
 ax.xaxis.set_major_locator(mdates.HourLocator(byhour=[6,18]))
 
+# X軸ラベル（目盛り文字）のサイズ変更
+ax.tick_params(axis='x', labelsize=15)
+
 # ユニークな日付を取得（時刻は0:00にする）
 dates = pd.to_datetime(dsp['time']).normalize().unique()
 
