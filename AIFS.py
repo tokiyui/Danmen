@@ -261,8 +261,8 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %HJST'))
 # X軸の目盛り間隔を6時間に設定
 ax.xaxis.set_major_locator(mdates.HourLocator(byhour=[6,18]))
 
-# 00:00 JSTに補助線を追加（点線）
-#ax.axvline(datetime.datetime(2025, 4, 9, 0, 0), color='red', linestyle='--', label='00:00 JST')
+# X軸ラベル（目盛り文字）のサイズ変更
+ax.tick_params(axis='x', labelsize=15)
 
 # ユニークな日付を取得（時刻は0:00にする）
 dates = pd.to_datetime(dsp['time']).normalize().unique()
