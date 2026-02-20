@@ -249,7 +249,7 @@ ax.plot(dts, lcl_heights, color='blue', label='LCL (hPa)', linestyle='', marker=
 ax.plot(dts, el_heights, color='red', label='EL (hPa)', linestyle='', marker='o', markersize=12)
 
 ## T-TDの時系列鉛直分布表示
-ax.contourf(dsp['time'],  dsp['level'].values, dsp['ttd'][:,:,i_lat,i_lon].values.T, [6,15], colors=["lime","white","yellow"], extend='both', alpha = 0.4)
+ax.contourf(dsp['time'],  dsp['level'].values, dsp['ttd'][:,:,i_lat,i_lon].values.T, [3,15], colors=["lime","white","yellow"], extend='both', alpha = 0.4)
 
 # 気温(橙実線)とラベル
 tmp_contour = ax.contour(dsp['time'],  dsp['level'].values, dsp['temperature'][:,:,i_lat,i_lon].values.T, levels=np.arange(-60, 45, 3), colors='red', linewidths=1, linestyles='solid')
