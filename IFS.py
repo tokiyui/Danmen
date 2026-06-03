@@ -47,15 +47,10 @@ tagHp=100
 
 # データの格納先フォルダー名
 ##!!! GRIB2データの保存先をFolderを指定すること !!!
-if i_hourZ == 00 or i_hourZ == 12:
-    name = "oper"
-else:
-    name = "scda"
-
-data_fld="https://storage.googleapis.com/ecmwf-open-data/{0:04d}{1:02d}{2:02d}/{3:02d}z/ifs/0p25/{4:s}/"
+data_fld="https://storage.googleapis.com/ecmwf-open-data/{0:04d}{1:02d}{2:02d}/{3:02d}z/ifs/0p25/oper/"
 
 # 読み込むGRIB2形式GSMのファイル名
-gsm_fn_t="{0:4d}{1:02d}{2:02d}{3:02d}0000-{4:d}h-{5:s}-fc.grib2"
+gsm_fn_t="{0:4d}{1:02d}{2:02d}{3:02d}0000-{4:d}h-oper-fc.grib2"
 
 # ### データフレームを作成するための４次元配列を確保する
 # - 試しにGPVを読み込み、必要な配列を確保するlevelやlat,lonのサイズを求める
@@ -66,8 +61,8 @@ gsm_fn_t="{0:4d}{1:02d}{2:02d}{3:02d}0000-{4:d}h-{5:s}-fc.grib2"
 ### 事前に一度データを読み込み  配列のサイズを決めるため
 ft = fts[0]
 
-dat_fld = data_fld.format(i_year,i_month,i_day,i_hourZ,name)
-gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,ft,name)
+dat_fld = data_fld.format(i_year,i_month,i_day,i_hourZ)
+gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,ft)
 
 # HTTPでファイルダウンロード
 response = requests.get(dat_fld + gr_fn)
@@ -112,7 +107,7 @@ dts=[]
 for i in range(t_size): # ft の時間ループ
     ft = fts[i]
     # ファイル名作成
-    gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,ft,name)
+    gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,ft)
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
