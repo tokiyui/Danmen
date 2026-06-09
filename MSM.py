@@ -71,7 +71,7 @@ dat_fld = data_fld.format(i_year,i_month,i_day)
 gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,'00-15')
 
 # HTTPでファイルダウンロード
-response = requests.get(dat_fld + gr_fn)
+response = requests.get(dat_fld + gr_fn, verify=False)
 response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
 
 # ダウンロードしたコンテンツをローカルに保存
