@@ -72,7 +72,7 @@ dat_fld = data_fld.format(i_year,i_month,i_day)
 gr_fn = gsm_fn_t.format(i_year,i_month,i_day,i_hourZ,'0000-0100')
 
 # HTTPでファイルダウンロード
-response = requests.get(dat_fld + gr_fn)
+response = requests.get(dat_fld + gr_fn, verify=False)
 response.raise_for_status()  # ダウンロードに失敗した場合、エラーを発生させる
 
 # ダウンロードしたコンテンツをローカルに保存
@@ -131,7 +131,7 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
-    file_path = os.path.join(dat_fld, gr_fn)
+    file_path = os.path.join(dat_fld, gr_fn, verify=False)
     if not os.path.exists(gr_fn):
         print(f"ダウンロード開始: {gr_fn}")
         response = requests.get(dat_fld + gr_fn)
