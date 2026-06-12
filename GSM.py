@@ -131,10 +131,10 @@ for i in range(t_size): # ft の時間ループ
     print("FT:{:02d}:{:04d} {}".format(ft, ft,gr_fn))
 
     # HTTPでファイルダウンロード
-    file_path = os.path.join(dat_fld, gr_fn, verify=False)
+    file_path = os.path.join(dat_fld, gr_fn)
     if not os.path.exists(gr_fn):
         print(f"ダウンロード開始: {gr_fn}")
-        response = requests.get(dat_fld + gr_fn)
+        response = requests.get(dat_fld + gr_fn, verify=False)
         response.raise_for_status()  # エラーがあれば例外を発生
 
     # ダウンロードしたコンテンツをローカルに保存
