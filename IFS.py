@@ -47,10 +47,10 @@ tagHp=100
 
 # データの格納先フォルダー名
 ##!!! GRIB2データの保存先をFolderを指定すること !!!
-data_fld="https://storage.googleapis.com/ecmwf-open-data/{0:04d}{1:02d}{2:02d}/{3:02d}z/ifs/0p25/oper/"
+data_fld="https://storage.googleapis.com/ecmwf-open-data/{0:04d}{1:02d}{2:02d}/{3:02d}z/ifs/0p1/oper/"
 
 # 読み込むGRIB2形式GSMのファイル名
-gsm_fn_t="{0:4d}{1:02d}{2:02d}{3:02d}0000-{4:d}h-oper-fc.grib2"
+gsm_fn_t="{0:4d}{1:02d}{2:02d}{3:02d}0000-{4:d}h-oper-fc-pl.grib2"
 
 # ### データフレームを作成するための４次元配列を確保する
 # - 試しにGPVを読み込み、必要な配列を確保するlevelやlat,lonのサイズを求める
